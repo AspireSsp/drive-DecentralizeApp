@@ -4,6 +4,7 @@ import { ethers } from "ethers";
 import {useState, useEffect} from 'react';
 import FileUpload from './component/FileUpload';
 import FileList from './component/FileList';
+import NavBar from './component/NavBar';
 function App() {
 
     const[account, setAccount] = useState();
@@ -12,7 +13,6 @@ function App() {
     const[openModel, setOpenModel] = useState();
     // console.log(upload.abi);
     useEffect(() => {
-      // console.log(myProvider);
       const loadProvider = async()=>{
         const provider = new ethers.BrowserProvider(window.ethereum);
         if(provider){
@@ -24,9 +24,8 @@ function App() {
           });       
           await provider.send("eth_requestAccounts", [])
           const signer =  await provider.getSigner();
-          let contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+          let contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
           const contract = new ethers.Contract(contractAddress, upload.abi, signer)
-          console.log("my cc",contract);
           setContract(contract);
           setProvider(provider);
           setAccount(signer.address)
@@ -38,14 +37,11 @@ function App() {
       loadProvider();
     }, [])
     
-
-
     return (
         <div className="App">
-          <h1>Google Drive 3.0</h1>
-          <h2>Account: {account ? account: "connect your metamask account...!"}</h2>
+          <NavBar account={account} />
           <FileUpload contract={contract} account={account} provider={provider} />
-          {/* <FileList contract={contract} account={account} provider={provider} /> */}
+          <FileList contract={contract} account={account} provider={provider} />
         </div>
     );
 }

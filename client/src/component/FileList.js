@@ -5,33 +5,32 @@ const FileList = ({contract, account, provider}) => {
     const [files, setFiles] = useState([]);
     useEffect(() => {
         const getFiles = async()=>{
-            const myfiles = await contract.display(account);
-            if (myfiles) {
-                const fileArr = myfiles.split(',');
-                setFiles(fileArr);
+            if(contract){
+                let myfiles = await contract.display(account);
+                if (myfiles) {
+                    setFiles(myfiles);
+                }
             }
         }
         getFiles();
-        setFiles([
-            "https://harlequin-negative-hedgehog-66.mypinata.cloud/ipfs/QmZMvecKjkt84GzU7juxD9kPXeTRbBTJ53zbdmBqtpG142",
-            "https://harlequin-negative-hedgehog-66.mypinata.cloud/ipfs/QmZMvecKjkt84GzU7juxD9kPXeTRbBTJ53zbdmBqtpG142",
-            "https://harlequin-negative-hedgehog-66.mypinata.cloud/ipfs/QmZMvecKjkt84GzU7juxD9kPXeTRbBTJ53zbdmBqtpG142",
-            "https://harlequin-negative-hedgehog-66.mypinata.cloud/ipfs/QmZMvecKjkt84GzU7juxD9kPXeTRbBTJ53zbdmBqtpG142",
-            "https://harlequin-negative-hedgehog-66.mypinata.cloud/ipfs/QmZMvecKjkt84GzU7juxD9kPXeTRbBTJ53zbdmBqtpG142",
-        ])
-    }, [])
+       
+    }, [account, contract])
     
     return (
-        <div>
+        <div style={{width:'100%'}}>
             <h2>Here is your file list:</h2>
-            <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center'}}>
-                {
-                    files.map((file, index)=>(
-                        <div key={index} style={{width: '300px', height:"200px"}}>
-                            <img src={file} alt='image' style={{width:"100%"}} />
-                        </div>
-                    ))
-                }
+            <div style={{width:'90%'}}>
+                <div style={{display:'flex', flexWrap:'wrap', justifyContent:'center', alignItems:'center'}}>
+                    {
+                        files.map((file, index)=>(
+                            <div key={index} style={{width: '300px', height:"200px", margin:'5px'}}>
+                                <img src={file} alt='image' style={{width:"100%"}} />
+                            </div>
+                        ))
+                    }
+                     
+                </div>
+
             </div>
         </div>
     )

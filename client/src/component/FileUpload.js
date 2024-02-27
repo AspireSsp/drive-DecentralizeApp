@@ -42,16 +42,17 @@ const FileUpload = ({contract, account}) => {
         }
     } 
     return (
-        <div>
-            <form>
-                <label>
-                    Select File
-                </label>
-                <input type='file' disabled={!account} onChange={(event)=>{setFile(event.target.files[0])}} />
-                <button onClick={handleSubmit}>Upload</button>
-                {/* https://harlequin-negative-hedgehog-66.mypinata.cloud/ipfs/QmZMvecKjkt84GzU7juxD9kPXeTRbBTJ53zbdmBqtpG142 */}
-                <img src={`https://harlequin-negative-hedgehog-66.mypinata.cloud/ipfs/QmZMvecKjkt84GzU7juxD9kPXeTRbBTJ53zbdmBqtpG142`} alt="ipfs image" />
-            </form>
+        <div style={{width:'100%', display:'flex', justifyContent:'center', alignItems:'center', margin:'10px' }}>
+
+            <div style={{width:'60%', border:'0.5px solid #cbd5e1', padding:'10px', borderRadius:'5px'}}>
+                <form>
+                    <label>
+                        Select File
+                    </label>
+                    <input style={{cursor:'pointer'}} type='file' disabled={!account} onChange={(event)=>{setFile(event.target.files[0])}} />
+                    <button style={{background:'#0ea5e9', padding:'8px', border:'0px', borderRadius:'4px', color:"white", cursor:'pointer'}} onClick={handleSubmit}>Upload</button>
+                </form>
+            </div>
         </div>
     )
 }

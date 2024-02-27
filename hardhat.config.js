@@ -4,15 +4,17 @@ require("@nomicfoundation/hardhat-toolbox");
 module.exports = {
   solidity: "0.8.9",
   networks: {
-    hardhat: {
-      chainId: 1337,
+    localhost: {
+      url: "http://127.0.0.1:8545",
+      chainId: 31337,
     },
-    sepolia: {
-      url: "https://eth-sepolia.g.alchemy.com/v2/fb-BloGbCP2oNfQsf-60yOC0cIlX-0ur",
-      chainId: 11155111,
-    }
   },
   paths: {
     artifacts: "./client/src/artifacts",
   },
 };
+
+// localhost: {
+//   url: "http://127.0.0.1:8545",
+//   chainId: 31337,
+// },
